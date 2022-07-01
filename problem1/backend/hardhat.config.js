@@ -11,17 +11,25 @@ require("hardhat-deploy")
  */
 
 const RINKEBY_RPC_URL = process.env.RINKEBY_RPC_URL
-const RINKEBY_PRIVATE_KEY = process.env.RINKEBY_PRIVATE_KEY
+const PRIVATE_KEY = process.env.RINKEBY_PRIVATE_KEY
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY
 const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY
+const MUMBAI_RPC_URL = process.env.MUMBAI_RPC_URL
+const POLYGONSCAN_API_KEY = process.env.POLYGONSCAN_API_KEY
 
 module.exports = {
     solidity: "0.8.7",
     networks: {
         rinkeby: {
             url: RINKEBY_RPC_URL,
-            accounts: [RINKEBY_PRIVATE_KEY],
+            accounts: [PRIVATE_KEY],
             chainId: 4,
+            blockConfirmations: 6,
+        },
+        mumbai: {
+            url: MUMBAI_RPC_URL,
+            accounts: [PRIVATE_KEY],
+            chainId: 80001,
             blockConfirmations: 6,
         },
     },
@@ -33,7 +41,7 @@ module.exports = {
         coinmarketcap: COINMARKETCAP_API_KEY,
     },
     etherscan: {
-        apiKey: ETHERSCAN_API_KEY,
+        apiKey: POLYGONSCAN_API_KEY,
     },
     namedAccounts: {
         deployer: {
