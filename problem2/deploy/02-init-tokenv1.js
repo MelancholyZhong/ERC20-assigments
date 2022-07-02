@@ -3,7 +3,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     const { log } = deployments
     const { deployer } = await getNamedAccounts()
     await deployments.execute(
-        "SimpleToken",
+        "SimpleToken_Implementation",
         {
             from: deployer,
         },
