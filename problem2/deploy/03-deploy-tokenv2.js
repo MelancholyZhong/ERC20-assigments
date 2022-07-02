@@ -10,7 +10,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     const { deployer } = await getNamedAccounts()
     const simpleTokenV2 = await deploy("SimpleTokenV2", {
         from: deployer,
-        args: [INITIAL_SUPPLY],
+        args: [],
         log: true,
         waitConfirmations: network.config.blockConfirmations || 1,
     })
@@ -23,9 +23,9 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
         await verify(
             "contracts/SimpleTokenV2.sol:SimpleTokenV2",
             simpleTokenV2.address,
-            [INITIAL_SUPPLY]
+            []
         )
     }
 }
 
-module.exports.tags = ["all", "token"]
+module.exports.tags = ["all", "tokenv2"]
