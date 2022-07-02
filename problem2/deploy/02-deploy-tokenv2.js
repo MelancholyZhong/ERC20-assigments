@@ -8,28 +8,21 @@ const { verify } = require("../utils/verify")
 module.exports = async ({ getNamedAccounts, deployments }) => {
     const { deploy, log } = deployments
     const { deployer } = await getNamedAccounts()
-    const simpleToken = await deploy("SimpleToken", {
+    const simpleTokenV2 = await deploy("SimpleTokenV2", {
         from: deployer,
         args: [INITIAL_SUPPLY],
         log: true,
         waitConfirmations: network.config.blockConfirmations || 1,
-        proxy: {
-            proxyContract: "OpenZeppelinTransparentProxy",
-            viaAdminContract: {
-                name: "SimpleTokenProxyAdmin",
-                artifact: "SimpleTokenProxyAdmin",
-            },
-        },
     })
-    log(`simpleToken deployed at ${simpleToken.address}`)
+    log(`simpleTokenV2 deployed at ${simpleTokenV2.address}`)
 
     if (
         !developmentChains.includes(network.name) &&
         process.env.ETHERSCAN_API_KEY
     ) {
         await verify(
-            "contracts/SimpleToken.sol:SimpleToken",
-            simpleToken.address,
+            "contracts/SimpleTokenV2.sol:SimpleTokenV2",
+            simpleTokenV2.address,
             [INITIAL_SUPPLY]
         )
     }
