@@ -9,4 +9,8 @@ contract SimpleToken is ERC20Upgradeable {
         __ERC20_init("SimpleToken", "ST");
         _mint(msg.sender, initialSupply);
     }
+
+    function version() public pure returns (uint256) {
+        return 1;
+    }
 }

@@ -9,4 +9,8 @@ contract SimpleTokenV2 is ERC20Upgradeable {
         __ERC20_init("SimpleToken", "STII");
         _mint(msg.sender, initialSupply);
     }
+
+    function version() public pure returns (uint256) {
+        return 2;
+    }
 }

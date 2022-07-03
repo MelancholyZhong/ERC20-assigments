@@ -23,13 +23,17 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     })
     log(`simpleToken deployed at ${simpleToken.address}`)
 
+    const simpleToken_Implementation = await ethers.getContract(
+        "SimpleToken_Implementation"
+    )
+
     if (
         !developmentChains.includes(network.name) &&
         process.env.ETHERSCAN_API_KEY
     ) {
         await verify(
-            "contracts/SimpleToken.sol:SimpleToken",
-            simpleToken.address,
+            "contracts/SimpleToken.sol:SimpleToken_Implementation",
+            simpleToken_Implementation.address,
             []
         )
     }

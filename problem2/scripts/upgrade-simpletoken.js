@@ -13,6 +13,13 @@ async function main() {
     )
     await upgradeTx.wait(1)
 
+    const proxyTokenV2 = await ethers.getContractAt(
+        "SimpleTokenV2",
+        transparentProxy.address
+    )
+    const version = await proxyTokenV2.version()
+    console.log(version.toString())
+
     console.log("now upgraded to simple token version2 with simbol STII")
 }
 
