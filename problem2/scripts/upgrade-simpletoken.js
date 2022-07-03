@@ -6,6 +6,13 @@ async function main() {
     )
     const transparentProxy = await ethers.getContract("SimpleToken_Proxy")
 
+    const proxyTokenV1 = await ethers.getContractAt(
+        "SimpleToken",
+        transparentProxy.address
+    )
+    let version = await proxyTokenV1.version()
+    console.log(version.toString())
+
     const simpleTokenV2 = await ethers.getContract("SimpleTokenV2")
     const upgradeTx = await simpleTokenProxyAdmin.upgrade(
         transparentProxy.address,
@@ -17,7 +24,7 @@ async function main() {
         "SimpleTokenV2",
         transparentProxy.address
     )
-    const version = await proxyTokenV2.version()
+    version = await proxyTokenV2.version()
     console.log(version.toString())
 
     console.log("now upgraded to simple token version2 with simbol STII")
