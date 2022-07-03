@@ -1,4 +1,4 @@
-# Upgradedable ERC20 project
+# Upgradeable ERC20 project
 
 ## What I have implemented
 
